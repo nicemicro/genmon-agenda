@@ -28,6 +28,7 @@ fi
 
 printf " </txt>\n"
 
-echo "<tool>"
-	todo --humanize list --startable --no-reverse --sort due
+printf "<tool>"
+	todo --humanize list --startable --no-reverse --sort due \
+		| sed -e 's/\[ \] [0-9]*[ ]*//'
 echo "</tool>"
