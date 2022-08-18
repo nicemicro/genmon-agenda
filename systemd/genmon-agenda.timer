@@ -1,0 +1,10 @@
+[Unit]
+Description=Syncs vdirs, caches todo and event descriptions regularly
+
+[Timer]
+OnActiveSec=5
+OnUnitActiveSec=15m
+AccuracySec=5
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,8 @@
+[Unit]
+Description=Syncs vdirs, caches todo and event descriptions
+
+[Service]
+ExecStart=$HOME/bin/genmon-agenda/scripts/agenda-job.sh
+
+[Install]
+WantedBy=default.target
