@@ -7,9 +7,9 @@ TODAY="yellow" # events today
 RNDTEXT="jjjandosmdadijsajndsndad" # a random text to count events
 
 # All events this day
-DAY=$(khal list today 1d --once --format "$RNDTEXT" | grep "$RNDTEXT" | wc -l)
+DAY=$(khal list now 1d --once --format "$RNDTEXT" | grep "$RNDTEXT" | wc -l)
 # All events this week
-WEEK=$(khal list --once --format "$RNDTEXT" | grep "$RNDTEXT" | wc -l)
+WEEK=$(khal list now --once --format "$RNDTEXT" | grep "$RNDTEXT" | wc -l)
 
 
 # text in the xfce4 bar
@@ -25,5 +25,5 @@ echo "<txtclick>$TERMINAL ikhal</txtclick>"
 
 # tooltip
 echo "<tool>"
-	khal list
+	khal list now
 echo "</tool>"
