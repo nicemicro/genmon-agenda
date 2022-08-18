@@ -5,12 +5,17 @@ EXPIRED="red" # expired task color
 URGENT="yellow" # due in 36 hours
 PRIOR="purple" # high priority
 
-DUEALREADY=$(todo list --due 1 | sed -s "/^$/d" | wc -l) # Due in an hour
-DUENEXT=$(todo list --due 36 --startable | sed -s "/^$/d" | wc -l) # Due in 36 hours
-ALL=$(todo list --startable | sed -s "/^$/d" | wc -l) # All open tasks
-HIGHPR=$(todo list --priority high | sed -s "/^$/d" | wc -l) # High priority tasks
+# Due in an hour
+DUEALREADY=$(todo list --due 1 | sed -s "/^$/d" | wc -l)
+# Due in 36 hours
+DUENEXT=$(todo list --due 36 --startable | sed -s "/^$/d" | wc -l)
+# All open tasks
+ALL=$(todo list --startable | sed -s "/^$/d" | wc -l)
+# High priority tasks
+HIGHPR=$(todo list --priority high | sed -s "/^$/d" | wc -l)
 
-printf "<txt> "
+# text in the xfce4 bar
+printf "<txt> <span foreground='%s'>Tasks: </span>" $FG
 if [ $DUEALREADY != 0 ]; then
 	printf "<span foreground='%s'>%d</span>" $EXPIRED $DUEALREADY
 	printf "<span foreground='%s'> | </span>" $FG
@@ -28,6 +33,7 @@ fi
 
 printf " </txt>\n"
 
+# tooltip
 printf "<tool>"
 	todo --humanize list --startable --no-reverse --sort due \
 		| sed -e 's/\[ \] [0-9]*[ ]*//'
