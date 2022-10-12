@@ -1,0 +1,51 @@
+[general]
+status_path = "~/.local/share/vdirsyncer/status/"
+
+[pair ${CALNAME}]
+a = "${LOCALNAME}"
+b = "${CALSHORT}"
+collections = ["from a", "from b"]
+metadata = ["color"]
+conflict_resolution = ["command", "nvim", "-d"]
+
+[storage ${LOCALNAME}]
+type = "filesystem"
+path = "~/.local/share/calendars/${LOCALNAME}"
+fileext = ".ics"
+
+[storage ${CALSHORT}]
+type = "caldav"
+url = "https://${CLOUDURL}/remote.php/dav"
+username = "${USERNAME}"
+password.fetch = ["command", "secret-tool", "lookup", "server", "${CLOUDNAME}", "username", "${USERNAME}", "app", "vdirsyncer"]
+
+[pair ${COUNTRY}_holidays]
+a = "local_${COUNTRYSHORT}"
+b = "remote_${COUNTRYSHORT}"
+collections = null
+
+[storage local_${COUNTRYSHORT}]
+type = "filesystem"
+path = "~/.local/share/calendars/${COUNTRYSHORT}"
+fileext = ".ics"
+
+[storage remote_${COUNTRYSHORT}]
+type = "http"
+url = "https://calendars.icloud.com/holidays/${COUNTRYSHORT}_${LANGSHORT}.ics"
+
+[pair contacts_${CLOUDNAME}]
+a = "local_card_${CLOUDNAME}"
+b = "card_${CLOUDNAME}"
+collections = ["from a", "from b"]
+conflict_resolution = ["command", "nvim", "-d"]
+
+[storage local_card_${CLOUDNAME}]
+type = "filesystem"
+path = "~/.local/share/contacts/${CLOUDNAME}"
+fileext = ".vcf"
+
+[storage card_${CLOUDNAME}]
+type = "carddav"
+url = "https://${CLOUDURL}/remote.php/dav"
+username = "${USERNAME}"
+password.fetch = ["command", "secret-tool", "lookup", "server", "${CLOUDNAME}", "username", "${USERNAME}", "app", "vdirsyncer"]
