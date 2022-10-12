@@ -1,5 +1,6 @@
 #!/bin/bash
 # configuration
+TERMINAL="st -e" # the terminal application to use
 FG="white" # default foreground colour
 EXPIRED="red" # expired task color
 URGENT="yellow" # due in 36 hours
@@ -32,6 +33,9 @@ if [ $HIGHPR != 0 ]; then
 fi
 
 printf " </txt>\n"
+
+# what happens on click
+echo "<txtclick>$TERMINAL $HOME/bin/genmon-agenda/scripts/todoman-interactive.sh</txtclick>"
 
 # tooltip
 printf "<tool>"
